@@ -1,18 +1,18 @@
 <%= form_for @post do |f| %>
- <%= render 'shared/post_error_messages' %>
- 
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
- 
-  <p>
-    <%= f.label :text %><br>
-    <%= f.text_area :text %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
- 
+<%= render 'shared/post_error_messages' %>
+
+<p>
+  <%= f.label :title %><br>
+  <%= f.text_field :title %>
+</p>
+
+<p>
+  <%= f.label :text %><br>
+  <%= f.text_area :text %>
+</p>
+
+<p>
+  <%= f.submit %>
+</p>
+
 <% end %>

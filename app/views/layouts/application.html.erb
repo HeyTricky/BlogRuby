@@ -7,8 +7,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          <%= link_to "Fludilka", '/', id: "logo" %>
+          <nav>
+            <ul class="nav pull-right">
+              <li><%= link_to 'My Blog', controller: 'posts' %></li>
+              <li><%= link_to "Sign up now!", signup_path %></li>
+              <li><%= link_to "Users", users_path %></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+<div class="container">
+  <%= yield %>
+</div>
 </body>
 </html>

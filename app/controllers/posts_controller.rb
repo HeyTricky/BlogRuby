@@ -1,23 +1,27 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
 
   def index
     @posts = Post.all
   end
 
   def new
+    authorize! :create, Post
     @post = Post.new
   end
 
   def edit
     @post = Post.find(params[:id])
+    authorize! :update, @post
   end
   
   def show
     @post = Post.find(params[:id])
+    authorize! :read, @post
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
     if @post.save
       redirect_to @post
     else
@@ -27,6 +31,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
+    authorize! :delete, @post
     @post.destroy
     redirect_to posts_path
   end

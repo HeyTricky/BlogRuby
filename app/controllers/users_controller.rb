@@ -1,17 +1,19 @@
 class UsersController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     @users = User.all
   end
-
+ 
   def new
     @user = User.new
   end
- 
+
   def create
     @user = User.new(user_params)
     if @user.save
       redirect_to @user
-      flash[:success] = "Welcome to the blog Fludilka"
+      flash[:success] = "Добавлен новый пользователь"
     else
       render :new
     end
@@ -28,8 +30,8 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to @user
-      flash[:success] = "Ваши данные были успешно изменены"
+      redirect_to @user      
+      flash[:success] = "Данные о пользователе были успешно изменены"
     else
       render :edit
     end

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'authority'
+#gem 'authority'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'heroku'
 gem 'bootstrap-sass'
@@ -11,6 +11,8 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'devise'
+gem 'cancan'
 
 group :production do
 	gem 'pg', '0.15.1'

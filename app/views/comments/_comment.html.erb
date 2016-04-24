@@ -1,10 +1,17 @@
 
 <p>
-	<strong>Comment:</strong>
+	<strong>Коментатор:</strong>
+	<%= comment.user.name %>
+</p>
+
+<p>
+	<strong>Содержание:</strong>
 	<%= comment.body %>
 </p>
+<% if can? :delete, comment %>
 <p>
 	<%= link_to 'Destroy Comment', [comment.post, comment],
 	method: :delete,
 	data: { confirm: 'Are you sure?' } %>
 </p>
+<% end %>

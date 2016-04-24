@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
     roles.any? {|r| r.name.underscore.to_sym == role_sym }
   end
 
+  def isOwner?()
+    
+  end
+
   private
   def create_role
     self.roles << Role.find_by_name("user")

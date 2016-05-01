@@ -1,0 +1,41 @@
+<li>
+	<h2><%= link_to post.title, post_path(post) %></h2>
+	<h4>Автор: <%= link_to post.user.name, user_path(post.user.id) %></h4>
+	<div class="">
+		<div class="content">
+			<% if post.text.length > 300 %>
+			<%= truncate(post.text, length: 300) %>
+			<%= link_to 'читать полностью', '', class: "read-more-#{post.id}" %>
+			<script>
+				$('.read-more-<%= post.id %>').on('click', function(e) {
+					e.preventDefault()
+					$(this).parent().html('<%= escape_javascript post.text %>')
+				})
+			</script>
+			<% else %>
+			<%= post.text %>
+			<% end %>
+			<div>
+
+			</div>
+		</div>
+	</div>
+	<div class="form-inline">
+		<div class="form-group rud-btn separator">
+			<% if can? :read, post %>
+			<%= link_to 'Просмотреть', post_path(post) %> |
+			<% end %>
+			<% if can? :update, post %>
+			<%= link_to 'Редактировать', edit_post_path(post) %> |
+			<%end%>
+			<% if can? :destroy, post %>
+			<%= link_to 'Удалить', post_path(post),
+			method: :delete,
+			data: { confirm: 'Вы уверены?' } %>
+			<%end%>
+		</div>
+		<div class="form-group timestamp right">
+			<%= time_ago_in_words(post.created_at) %> ago
+		</div>
+	</div>
+</li>

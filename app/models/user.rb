@@ -3,8 +3,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
-  has_many :users_roles
-  has_many :roles, :through => :users_roles
+  belongs_to :role
   has_many :posts
   has_many :comments
   before_save {self.email = email.downcase }
@@ -13,16 +12,24 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: {with: VALID_EMAIL_REGEX }, uniqueness: {case_sensitive: false }
   
   def has_role?(role_sym)
-    roles.any? {|r| r.name.underscore.to_sym == role_sym }
+    return self.role == Role.find_by_name(role_sym.to_sym)
   end
 
-  def isOwner?()
-    
+  def set_moderator
+    self.role = Role.find_by_name("moderator")
+  end
+
+  def set_user
+    self.role = Role.find_by_name("user")
+  end
+
+  def isModerator?
+    return self.role==Role.find_by_name("moderator")
   end
 
   private
   def create_role
-    self.roles << Role.find_by_name("user")
+    self.role ||= Role.find_by_name("user")
   end
 
 

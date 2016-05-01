@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   resources :comments
  end
 
- resources :users
+ resources :users do
+    resources :posts, only: [:create]
+  end
+ get 'users/set_moderator/:id' => 'users#set_moderator'
+ get 'users/set_user/:id' => 'users#set_user'
 
 #resources :users
 #resources :sessions, only: [:new, :create, :destroy]

@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @posts = Post.all
+    @posts = Post.all.paginate(page: params[:page], :per_page => 5)
   end
 
   def new
@@ -12,18 +12,17 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    authorize! :update, @post
   end
   
   def show
     @post = Post.find(params[:id])
-    authorize! :read, @post
+    @comments = @post.comments.paginate(page: params[:page], :per_page => 4)
   end
 
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      redirect_to @post
+        redirect_to @post
     else
       render :new
     end
@@ -31,7 +30,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    authorize! :delete, @post
+    authorize! :destroy, @post
     @post.destroy
     redirect_to posts_path
   end

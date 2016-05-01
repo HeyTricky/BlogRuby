@@ -1,18 +1,50 @@
-<p>
-	<strong>Title:</strong>
+<h1>
 	<%= @post.title %>
-</p>
+</h1>
 
-<p>
-	<strong>Text:</strong>
+<div class="form-group time-show">
+	<%= @post.created_at %>
+</div>
+
+<div class="content-show">
 	<%= @post.text %>
-</p>
+</div>
+<div class="right">
 
-<h2>Comments</h2>
-<%= render @post.comments %>
-
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%=link_to 'Main', posts_path %>
+</div>
+<div class="form-inline">
+	<div class="form-group rud-btn separator">
+		<% if can? :update, @post %>
+		<%= link_to 'Редактировать', edit_post_path(@post) %> |
+		<%end%>
+		<% if can? :destroy, @post %>
+		<%= link_to 'Удалить', post_path(@post),
+		method: :delete,
+		data: { confirm: 'Вы уверены?' } %>
+		<%end%>
+	</div>
+	<div class="form-group right rud-btn">
+		Автор: 	<%= link_to @post.user.name, user_path(@post.user.id)%>
+	</div>
+</div>
+<hr>
+<h3>Комментарии</h3>
+<div class="container">
+	<% if !@comments.empty? %>
+		<%= render @comments %>
+		<%= will_paginate @comments %>
+	<%else%>
+		<h5>Пока нет ни одного комментария</h5>
+	<%end%>
+</div>
+<h3>Добавить комментарий:</h3>
+<div class="container">
+	<% if can? :create, Comment %>
+		<%= render 'comments/form' %>
+	<%else%>
+	<h5>
+		Чтобы оставить комментарий, <%= link_to "авторизуйтесь", new_user_session_path%> или <%= link_to "зарегистрируйтесь", new_user_registration_path%>
+	</h5>
+	<%end%>
+</div>
+<%=link_to 'Все статьи', posts_path %>

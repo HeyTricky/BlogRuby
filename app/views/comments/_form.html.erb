@@ -1,9 +1,7 @@
+
 <%= form_for([@post, @post.comments.build]) do |f| %>
-<p>
-	<%= f.label :body %><br>
-	<%= f.text_area :body %>
-</p>
-<p>
-	<%= f.submit %>
-</p>
+<div class="form-group add-comment-size">
+	<%= f.text_area :body, :class => 'form-control', rows: 5 %>
+		<%= f.submit 'Добавить', :class => 'btn btn-info my-btn right' %>
+</div>
 <% end %>

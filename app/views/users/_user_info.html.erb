@@ -1,0 +1,13 @@
+<%= link_to gravatar_for(@user, size: 52), @user, :class => 'profile-gravatar' %><br>
+<%= @user.name %><br>
+<%= @user.email %><br>
+<%= @user.role.name %><br>
+Статьи: <%= @user.posts.count%><br>
+Комментарии: <%= @user.comments.count%><br>
+	<% if can? :update, @user%>
+		<% if @user.isModerator?%>
+			<%= link_to "Назначить пользователем", :controller => "users", :action => "set_user", :id => @user.id%>
+		<%else%>
+			<%= link_to "Назначить модератором", :controller => "users", :action => "set_moderator", :id => @user.id%>
+		<%end%>
+	<%end%>

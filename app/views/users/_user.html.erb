@@ -1,0 +1,17 @@
+<hr>
+<div class="form-inline">
+	<div class="form-group">
+		<%= link_to gravatar_for(user, size: 52), user %>
+	</div>
+	<div class="form-group">
+		<%= link_to user.name, user %><br>
+		<%= user.role.name %><br>
+		Статьи: <%= user.posts.count%><br>
+		<% if can? :destroy, user %>
+		<%= link_to 'Удалить', user, method: :delete,
+		data: { confirm: 'Вы уверены?' } %>
+		<%else%>
+		<br>
+		<%end%>
+	</div>
+</div>

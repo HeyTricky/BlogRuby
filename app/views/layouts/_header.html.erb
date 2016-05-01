@@ -1,18 +1,20 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
-      <%= link_to "Fludilka", '/', id: "logo" %>
-      <nav>
-        <ul class="nav pull-right">       
-          <% if user_signed_in? %>
-          <li><%= link_to current_user.name, edit_user_registration_path%> </li>
-          <li><%= link_to "Выход", destroy_user_session_path, :method => :delete%> </li>
-          <% else %>
-          <li><%= link_to "Регистрация", new_user_registration_path%> </li>
-          <li><%= link_to "Вход", new_user_session_path%> </li>
-          <% end %>
-        </ul>
-      </nav>
+<nav class="navbar navbar-default navbar-inverse">
+  <div class="container">
+    <div class="logo">
+      <%= link_to "Fludilka", '/', :class => 'logo' %>
     </div>
+    <ul class="nav navbar-nav">
+      <li class="header-link"><%= link_to 'Статьи', posts_path %></li>
+      <li  class="header-link"><%= link_to 'Пользователи', users_path %></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">       
+      <% if user_signed_in? %>
+      <li  class="header-link"><%= link_to current_user.name, user_path(current_user.id)%> </li>
+      <li  class="header-link"><%= link_to "Выход", destroy_user_session_path, :method => :delete%> </li>
+      <% else %>
+      <li  class="header-link"><%= link_to "Регистрация", new_user_registration_path%> </li>
+      <li class="header-link"><%= link_to "Вход", new_user_session_path%> </li>
+      <% end %>
+    </ul>
   </div>
-</header>
+</nav>

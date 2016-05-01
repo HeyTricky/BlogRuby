@@ -6,15 +6,33 @@ class Ability
     
 
     if user.has_role? :admin
-        can :manage, :all
+        can :read, :all
+        can :create, :all
+        can :update, [Post,Comment]
+        can :update, User do |u|
+            u.id != user.id
+        end
+        can :destroy, :all
     else
-        if user.has_role? :user
+        if user.has_role? :moderator
             can :read, :all
-            can :create, :all
-            can :update, :all, :user_id => user.id
-            can :delete, :all, :user_id => user.id
+            can :create, Post
+            can :create, Comment
+            can :update, Post
+            can :update, Comment
+            can :destroy, Post
+            can :destroy, Comment
         else
-            can :read, Post
+            if user.has_role? :user
+                can :read, :all
+                can :create, [Post,Comment]
+                can :update, Post, :user_id => user.id
+                can :update, Comment, :user_id => user.id
+                can :destroy, Post, :user_id => user.id
+                can :destroy, Comment, :user_id => user.id
+            else
+                can :read, :all
+            end
         end
     end
 

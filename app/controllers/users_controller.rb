@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource
 
   def index
-    @users = User.all
+    @users = User.all.paginate(page: params[:page], :per_page => 4)
   end
  
   def new
@@ -21,6 +22,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.paginate(page: params[:page], :per_page => 3)
   end
 
   def edit
@@ -43,6 +45,19 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def set_moderator
+    @user = User.find(params[:id])
+    @user.set_moderator
+    @user.save
+    redirect_to @user
+  end
+
+  def set_user
+    @user = User.find(params[:id])
+    @user.set_user
+    @user.save
+    redirect_to @user
+  end
   private 
     def user_params
       params.require(:user).permit(:name,:email,:password,:password_confirmation)

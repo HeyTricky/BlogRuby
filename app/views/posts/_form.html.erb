@@ -1,18 +1,15 @@
 <%= form_for @post do |f| %>
 <%= render 'shared/post_error_messages' %>
 
-<p>
-  <%= f.label :title %><br>
-  <%= f.text_field :title %>
-</p>
-
-<p>
-  <%= f.label :text %><br>
-  <%= f.text_area :text %>
-</p>
-
-<p>
-  <%= f.submit %>
-</p>
-
+<div class="form-group">
+	<%= f.label 'Название', :id => :title%>
+	<%= f.text_field :title, :class => 'form-control'%>
+</div>
+<div class="form-group">
+	<%= f.label 'Текст' %><br>
+	<%= f.text_area :text, :rows => 7, :class => 'form-control' %>
+</div>
+<div class="form-group text-center">
+	<%= f.submit 'Сохранить', :class => 'btn btn-info my-btn'%>
+</div>
 <% end %>

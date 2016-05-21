@@ -4,7 +4,7 @@
 			<%=render 'user_info' %>
 		</td>
 		<td class="profile-posts">
-			<% if  current_user.id == @user.id %>
+			<% if  @user.isMyProfile?(current_user) %>
 			<div>
 				<h2 class="text-center">Добавление статьи</h2>
 				<%= render 'posts/formInfo' %>
@@ -15,7 +15,7 @@
 			<ol class="posts">
 				<%= render @posts %>
 			</ol>
-			<%= will_paginate @posts %>
+			<%= will_paginate @posts, :renderer => BootstrapPagination::Rails %>
 			<%else%>
 			<h3>Нет ни одной статьи</h3>
 			<% end %>

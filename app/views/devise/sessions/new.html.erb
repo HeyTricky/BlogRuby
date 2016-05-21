@@ -3,7 +3,7 @@
     <h1>Авторизация</h1>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
-      <%= f.label "Повтовый адрес" %><br />
+      <%= f.label "Email" %><br />
       <%= f.email_field :email, autofocus: true, class: 'form-control' %>
     </div>
 
@@ -15,7 +15,7 @@
     <% if devise_mapping.rememberable? -%>
     <div class="field">
       <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :remember_me, "Запомнить" %>
     </div>
     <% end -%>
 

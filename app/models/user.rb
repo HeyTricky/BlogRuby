@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     return self.role==Role.find_by_name("moderator")
   end
 
+  def isMyProfile?(current_user)
+    return self.id==current_user.id
+  end
+
   private
   def create_role
     self.role ||= Role.find_by_name("user")

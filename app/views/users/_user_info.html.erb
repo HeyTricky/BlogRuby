@@ -11,3 +11,7 @@
 			<%= link_to "Назначить модератором", :controller => "users", :action => "set_moderator", :id => @user.id%>
 		<%end%>
 	<%end%>
+	<% if  @user.isMyProfile?(current_user) %>
+		<%= link_to "Редактировать аккаунт", edit_user_registration_path(current_user)%>
+		<%= link_to "Удалить аккаунт", registration_path(current_user), data: {confirm: "Вы уверены?"}, method: :delete%>
+	<%end%>

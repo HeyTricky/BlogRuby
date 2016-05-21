@@ -23,12 +23,12 @@
 	<div class="form-inline">
 		<div class="form-group rud-btn separator">
 			<% if can? :read, post %>
-			<%= link_to 'Просмотреть', post_path(post) %> |
+			<%= link_to 'Просмотреть', post_path(post) %>
 			<% end %>
-			<% if can? :update, post %>
-			<%= link_to 'Редактировать', edit_post_path(post) %> |
+			<% if can? :update, post %>  |
+			<%= link_to 'Редактировать', edit_post_path(post) %> 
 			<%end%>
-			<% if can? :destroy, post %>
+			<% if can? :destroy, post %> |
 			<%= link_to 'Удалить', post_path(post),
 			method: :delete,
 			data: { confirm: 'Вы уверены?' } %>

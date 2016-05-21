@@ -32,7 +32,7 @@
 <div class="container">
 	<% if !@comments.empty? %>
 		<%= render @comments %>
-		<%= will_paginate @comments %>
+		<%= will_paginate @comments, :renderer => BootstrapPagination::Rails %>
 	<%else%>
 		<h5>Пока нет ни одного комментария</h5>
 	<%end%>

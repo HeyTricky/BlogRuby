@@ -13,7 +13,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'cancan'
-gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 group :production do
 	gem 'pg', '0.15.1'

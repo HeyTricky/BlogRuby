@@ -10,7 +10,7 @@
       <%= f.text_field :name, autofocus: true, class: 'form-control' %>
     </div>
     <div class="field">
-      <%= f.label "Почтовый адрес" %><br />
+      <%= f.label "Email" %><br />
       <%= f.email_field :email, autofocus: true, class: 'form-control' %>
     </div>
 
@@ -24,7 +24,7 @@
     </div>
 
     <div class="field">
-      <%= f.label "Повторение пароля" %><br />
+      <%= f.label "Подтверждение пароля" %><br />
       <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
     </div>
 
@@ -33,14 +33,10 @@
       <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
     </div>
 
-    <div class="actions">
+    <div class="actions text-center reg-btn">
       <%= f.submit "Сохранить", class: 'btn btn-info my-btn' %>
     </div>
     <% end %>
-
-    <h3>Cancel my account</h3>
-
-    <p><%= button_to "Удалить мой аккаунт", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
     <%= link_to "Назад", :back %>
   </div>

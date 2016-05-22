@@ -22,12 +22,21 @@ group :production do
 end
 
 group :development, :test do
+	gem 'rspec'
+	gem 'rspec-rails'  
+	gem 'factory_girl_rails' 
+	gem 'guard-rspec'
 	gem 'byebug'
+end
+
+group :test do
+  	gem 'libnotify', '0.8.0'
 end
 
 group :development do
 	gem 'web-console', '~> 2.0'
 	gem 'sqlite3'
 	gem 'spring'
+	gem 'guard-bundler', require: false
 end
 

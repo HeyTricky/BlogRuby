@@ -6,7 +6,6 @@ class PostsController < ApplicationController
   end
 
   def new
-    authorize! :create, Post
     @post = Post.new
   end
 
